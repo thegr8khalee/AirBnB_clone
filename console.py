@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
     
-    def do_emptyline(self, arg):
+    def emptyline(self):
         """do nothing"""
         pass
 
