@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+documented
+"""
 
 import cmd
 from models.base_model import BaseModel
