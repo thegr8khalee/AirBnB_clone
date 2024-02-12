@@ -4,9 +4,9 @@ documented
 """
 
 import cmd
-from models.base_model import BaseModel
+""" from models.base_model import BaseModel
 from models import storage
-import shlex
+import shlex """
 
 class HBNBCommand(cmd.Cmd):
     """
