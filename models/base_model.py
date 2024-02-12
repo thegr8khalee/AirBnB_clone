@@ -4,7 +4,7 @@ Write a class BaseModel that defines all common attributes/methods for other cla
 """
 import uuid
 from datetime import datetime
-
+from models import storage
 class BaseModel:
     """
     Initialize BaseModel instance
@@ -24,6 +24,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """
@@ -37,6 +38,7 @@ class BaseModel:
         updates the public instance attribute updated_at with the current datetime
         """
         self.updated_at = datetime.utcnow()
+        storage.save()
 
     def to_dict(self):
         """
@@ -50,7 +52,7 @@ class BaseModel:
         return inst_dict
 
 if __name__ == "__main__":
-    my_model = BaseModel()
+    """ my_model = BaseModel()
     my_model.name = "My First Model"
     my_model.my_number = 89
     print(my_model)
@@ -69,4 +71,18 @@ if __name__ == "__main__":
     print(type(my_new_model.created_at))
 
     print("--")
-    print(my_model is my_new_model)
+    print(my_model is my_new_model) """
+
+    all_objs = storage.all()
+    print("-- Reloaded objects --")
+    for obj_id in all_objs.keys():
+        obj = all_objs[obj_id]
+        print(obj)
+
+    print("-- Create a new object --")
+    my_model = BaseModel()
+    my_model.name = "My_First_Model"
+    my_model.my_number = 89
+    my_model.save()
+    print(my_model)
+
