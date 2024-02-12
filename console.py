@@ -12,14 +12,11 @@ class HBNBCommand(cmd.Cmd):
     valid_classes = ["BaseModel"]
 
     def do_quit(self, arg):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         return True
     
     def do_EOF(self, arg):
-        """
-        EOF reached
-        """
+        """EOF reached"""
         print("")
         return True
     
@@ -27,5 +24,5 @@ class HBNBCommand(cmd.Cmd):
         """do nothing """
         pass
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     HBNBCommand().cmdloop()
