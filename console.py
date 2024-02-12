@@ -1,12 +1,7 @@
 #!/usr/bin/python3
-"""
-documented
-"""
+"""documented"""
 
 import cmd
-""" from models.base_model import BaseModel
-from models import storage
-import shlex """
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -25,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
         """
         EOF reached
         """
-        print()
+        print("")
         return True
     
     def emptyline(self):
