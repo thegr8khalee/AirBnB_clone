@@ -52,7 +52,7 @@ class BaseModel:
         return inst_dict
 
 if __name__ == "__main__":
-    """ my_model = BaseModel()
+    my_model = BaseModel()
     my_model.name = "My First Model"
     my_model.my_number = 89
     print(my_model)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     print(type(my_new_model.created_at))
 
     print("--")
-    print(my_model is my_new_model) """
+    print(my_model is my_new_model)
 
     all_objs = storage.all()
     print("-- Reloaded objects --")
