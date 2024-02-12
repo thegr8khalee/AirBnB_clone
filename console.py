@@ -1,25 +1,27 @@
 #!/usr/bin/python3
-"""documented"""
+"""
+Console module containing the entry point of the command interpreter
+"""
 
 import cmd
 
 class HBNBCommand(cmd.Cmd):
     """
-    Command int
+    Command interpreter class
     """
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
-        """Quit command to exit the program"""
+        """Exit the program"""
         return True
-    
+
     def do_EOF(self, arg):
-        """EOF reached"""
-        print("")
+        """Exit the program"""
+        print()
         return True
-    
+
     def emptyline(self):
-        """do nothing """
+        """Do nothing when an empty line is entered"""
         pass
 
 if __name__ == '__main__':
