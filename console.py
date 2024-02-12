@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """
 Console module containing the entry point of the command interpreter
 """
@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
-        """Exit the program"""
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
@@ -23,11 +23,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing when an empty line is entered"""
         pass
-
-    def help_quit(self, arg):
-        """
-        mm"""
-        print("Quit command to quit the program")
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
