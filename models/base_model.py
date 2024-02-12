@@ -2,7 +2,7 @@
 import uuid
 from datetime import datetime
 #from models.engine.file_storage import FileStorage
-import models
+from models import storage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
@@ -19,7 +19,7 @@ class BaseModel:
                 else:
                     setattr(self, key, value)
         
-        models.storage.new(self)
+        storage.new(self)
 
     def __str__(self):
         """Return string representation of BaseModel instance"""
@@ -28,7 +28,7 @@ class BaseModel:
     def save(self):
         """Update the public instance attribute updated_at with the current datetime"""
         self.updated_at = datetime.utcnow()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
         """Return a dictionary containing all keys/values of __dict__ of the instance"""
