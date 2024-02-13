@@ -209,7 +209,7 @@ class HBNBCommand(cmd.Cmd):
         """ to retrieve an instance based on its ID: <class name>.show(<id>)."""
         args = shlex.split(arg)
 
-        if not args:
+        if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in self.valid_classes:
             print("** invalid class **")
