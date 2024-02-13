@@ -266,12 +266,12 @@ class HBNBCommand(cmd.Cmd):
             objs = storage.all()
             if key not in objs:
                 print("** no instance found **")
-            
-            instance = objs[key]
+            else:
+                instance = objs[key]
 
-            setattr(instance, attr, attr_value)
-            storage.save()
-
+                setattr(instance, attr, attr_value)
+                storage.save()
+                
 
 
 if __name__ == '__main__':
