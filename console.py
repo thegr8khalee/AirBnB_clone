@@ -166,7 +166,8 @@ class HBNBCommand(cmd.Cmd):
             "all": self.do_all,
             "show": self.do_show,
             "destroy": self.do_destroy,
-            "update": self.do_update
+            "update": self.do_update,
+            "count": self.do_count
         }
 
         args = arg.split('.')
@@ -183,6 +184,27 @@ class HBNBCommand(cmd.Cmd):
         
         print("*** Unknown syntax: {}".format(arg))
         return False
+    
+    def do_count(self, arg):
+        """Retrieve the number of instances of a class: <class name>.count()."""
+        objs = storage.all()
+        args = shlex.split(arg)
+
+        if not args:
+            print("** invalid command **")
+            return
+
+        clss = args[0]
+
+        if clss not in self.valid_classes:
+            print("** invalid class name **")
+            return
+
+        count = sum(1 for obj in objs.values() if obj.__class__.__name__ == clss)
+        print(count)
+        
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
