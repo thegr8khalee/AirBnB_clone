@@ -205,7 +205,7 @@ class HBNBCommand(cmd.Cmd):
         count = sum(1 for obj in objs.values() if obj.__class__.__name__ == clss)
         print(count)
 
-    def d0_show(self, arg):
+    def do_show(self, arg):
         """ to retrieve an instance based on its ID: <class name>.show(<id>)."""
         args = shlex.split(arg)
 
