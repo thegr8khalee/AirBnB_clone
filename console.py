@@ -223,8 +223,23 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def do_destroy(self, arg):
+        """ to destroy an instance based on his ID: <class name>.destroy(<id>)."""
+        args = shlex.split(arg)
 
-
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.valid_classes:
+            print("** invalid class **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            things = storage.all()
+            key = "{}.{}".format(args[0], args[1])
+            if key in storage.all():
+                del things[key]
+            else:
+                print("** no instance found **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
