@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     """
     Command int
     """
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     valid_classes = ["BaseModel", "User", "State", "City", "Place", "Amenity", "Review"]
 
@@ -157,6 +157,32 @@ class HBNBCommand(cmd.Cmd):
         Do nothing when an empty line is passed
         """
         pass
+
+    def default(self, arg):
+        """
+        retrieve all instances of a class by using: <class name>.all().
+        """
+        args_dict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update
+        }
+
+        args = arg.split('.')
+        clss = args[0]
+
+        args2 = args[1].split('(')
+
+
+        meth = args2[0]
+        
+
+        if meth in args_dict.keys():
+            return args_dict[meth]("{} {}".format(clss, ''))
+        
+        print("*** Unknown syntax: {}".format(arg))
+        return False
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
