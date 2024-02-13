@@ -20,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb)"
 
-    valid_classes = ["BaseModel", "User"]
+    valid_classes = ["BaseModel", "User", "State", "City", "Place", "Amenity", "Review"]
 
     def do_create(self, arg):
         """
