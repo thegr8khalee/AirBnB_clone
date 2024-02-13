@@ -241,9 +241,10 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def do_update(self, arg):
-        """to update an instance based on his ID: <class name>.update(<id>, <attribute name>, <attribute value>)"""
-        args = shlex.split(arg)
+    """ def do_update(self, arg):
+        """
+    "to update an instance based on his ID: <class name>.update(<id>, <attribute name>, <attribute value>)"""
+    """args = shlex.split(arg)
 
         if len(args) == 0:
             print("** class name missing **")
@@ -270,7 +271,7 @@ class HBNBCommand(cmd.Cmd):
                 instance = objs[key]
 
                 setattr(instance, attr, attr_value)
-                storage.save()
+                storage.save() """
                 
 
 

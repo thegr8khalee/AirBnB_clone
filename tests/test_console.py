@@ -1,0 +1,77 @@
+import unittest
+from unittest.mock import patch, MagicMock
+import io
+from console import HBNBCommand
+from models.base_model import BaseModel
+from models.user import User
+
+
+class TestHBNBCommand(unittest.TestCase):
+    def setUp(self):
+        self.console = HBNBCommand()
+
+    def tearDown(self):
+        del self.console
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_quit_command(self, mock_stdout):
+        self.assertTrue(self.console.onecmd("quit"))
+        expected_output = ""
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_EOF_command(self, mock_stdout):
+        self.assertTrue(self.console.onecmd("EOF"))
+        expected_output = "\n"
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_emptyline(self, mock_stdout):
+        self.console.emptyline()
+        expected_output = ""
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_create_command(self):
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            self.assertTrue(f.getvalue().strip())
+
+    def test_show_command(self):
+        new_instance = BaseModel()
+        new_instance_id = new_instance.id
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("show BaseModel {}".format(new_instance_id))
+            self.assertTrue(f.getvalue().strip())
+
+    def test_destroy_command(self):
+        new_instance = BaseModel()
+        new_instance_id = new_instance.id
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("destroy BaseModel {}".format(new_instance_id))
+            self.assertFalse(f.getvalue().strip())
+
+    def test_all_command(self):
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("all")
+            self.assertTrue(f.getvalue().strip())
+
+    def test_update_command(self):
+        new_instance = BaseModel()
+        new_instance_id = new_instance.id
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("update BaseModel {} name 'test'".format(new_instance_id))
+            self.assertFalse(f.getvalue().strip())
+
+    def test_count_command(self):
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("count BaseModel")
+            self.assertTrue(f.getvalue().strip())
+
+    def test_invalid_command(self):
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("invalid_command")
+            self.assertTrue(f.getvalue().strip())
+
+
+if __name__ == '__main__':
+    unittest.main()
