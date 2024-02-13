@@ -182,7 +182,7 @@ class HBNBCommand(cmd.Cmd):
         
 
         if meth in args_dict.keys():
-            return args_dict[meth]("{} {}".format(clss, args2))
+            return args_dict[meth]("{} {}".format(clss, arg2))
         
         print("*** Unknown syntax: {}".format(arg))
         return False
