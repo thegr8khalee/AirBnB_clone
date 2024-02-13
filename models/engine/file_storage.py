@@ -33,9 +33,11 @@ class FileStorage:
             except Exception:
                 pass
 
-    def classes(self):
-        """Returns a dictionary of valid classes and their references."""
-        from models.base_model import BaseModel
+    """ def classes(self):
+        """
+    """Returns a dictionary of valid classes and their references.
+    """
+    """from models.base_model import BaseModel
         from models.user import User
         from models.state import State
         from models.city import City
@@ -50,4 +52,4 @@ class FileStorage:
                    "Amenity": Amenity,
                    "Place": Place,
                    "Review": Review}
-        return classes
+        return classes """
