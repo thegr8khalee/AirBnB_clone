@@ -167,20 +167,22 @@ class HBNBCommand(cmd.Cmd):
             "show": self.do_show,
             "destroy": self.do_destroy,
             "update": self.do_update,
-            "count": self.do_count
+            "count": self.do_count,
+            "show": self.do_show
         }
 
         args = arg.split('.')
         clss = args[0]
 
         args2 = args[1].split('(')
+        arg2 = args2[1].split(')')[0]
 
 
         meth = args2[0]
         
 
         if meth in args_dict.keys():
-            return args_dict[meth]("{} {}".format(clss, ''))
+            return args_dict[meth]("{} {}".format(clss, args2))
         
         print("*** Unknown syntax: {}".format(arg))
         return False
@@ -202,7 +204,24 @@ class HBNBCommand(cmd.Cmd):
 
         count = sum(1 for obj in objs.values() if obj.__class__.__name__ == clss)
         print(count)
-        
+
+    def d0_show(self, arg):
+        """ to retrieve an instance based on its ID: <class name>.show(<id>)."""
+        args = shlex.split(arg)
+
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in self.valid_classes:
+            print("** invalid class **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            if key in storage.all():
+                print(storage.all()[key])
+            else:
+                print("** no instance found **")
+
 
 
 
