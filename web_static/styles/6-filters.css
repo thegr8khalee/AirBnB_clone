@@ -51,7 +51,7 @@
 }
 .filters .locations:hover,
 .filters .amenities:hover {
-  background-color: #fafafa;
+  background-color: white;
 }
 .filters .locations:hover .popover,
 .filters .amenities:hover .popover {
