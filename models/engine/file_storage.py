@@ -32,17 +32,14 @@ class FileStorage:
             json.dump(serialized_objects, file)
 
     def reload(self):
-        """deserializes the JSON file to __objects (only if the JSON file (__file_path)"""
-        if os.path.isfile(FileStorage.__file_path):
-            with open(self.__file_path, "r", encoding="utc-8") as file:
-                things = json.load(file)
-                things = {
-                    key: self.classes()[value["__class__"]](**value)
-                    for key, value in things.items()
-                }
-                FileStorage.__objects = things
-        else:
+        """Deserializes JSON file into __objects."""
+        if not os.path.isfile(FileStorage.__file_path):
             return
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
+                        for k, v in obj_dict.items()}
+            FileStorage.__objects = obj_dict
 
     def classes(self):
         """Returns a dictionary of valid classes and their references."""
