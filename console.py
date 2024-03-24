@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
             else: 
                 attr_name = args[2]
                 attr_value = args[3]
-                obj = storage.all()[key]
+                #obj = storage.all()[key]
 
                 try:
                     attr_value = eval(attr_value)
