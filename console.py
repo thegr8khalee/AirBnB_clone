@@ -168,7 +168,6 @@ class HBNBCommand(cmd.Cmd):
             "destroy": self.do_destroy,
             "update": self.do_update,
             "count": self.do_count,
-            "show": self.do_show
         }
 
         args = arg.split('.')
@@ -212,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in self.valid_classes:
-            print("** invalid class **")
+            print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
         else:
@@ -230,14 +229,14 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in self.valid_classes:
-            print("** invalid class **")
+            print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
         else:
-            things = storage.all()
+            #things = storage.all()
             key = "{}.{}".format(args[0], args[1])
             if key in storage.all():
-                del things[key]
+                storage.all()[key].delete()
             else:
                 print("** no instance found **")
 
