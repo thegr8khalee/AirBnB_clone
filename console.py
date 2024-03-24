@@ -195,7 +195,7 @@ class HBNBCommand(cmd.Cmd):
                 cls_id = temp[1]
                 cls_att = temp[2]
                 cls_att_value = temp[3]
-                return args_dict[meth]("{} {} {} {} {}".format(clss, arg2, cls_id, cls_att, cls_att_value))
+                return args_dict[meth]("{} {} {} {}".format(clss, cls_id, cls_att, cls_att_value))
         
         print("*** Unknown syntax: {}".format(arg))
         return False
