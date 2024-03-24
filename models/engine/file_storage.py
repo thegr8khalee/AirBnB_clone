@@ -41,6 +41,8 @@ class FileStorage:
                     for key, value in things.items()
                 }
                 FileStorage.__objects = things
+        else:
+            return
 
     def classes(self):
         """Returns a dictionary of valid classes and their references."""
