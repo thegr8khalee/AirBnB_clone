@@ -3,6 +3,11 @@ import json
 import os
 
 class FileStorage:
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     __file_path = "file.json"
     __objects = {}
 
@@ -30,8 +35,8 @@ class FileStorage:
             try:
                 with open(self.__file_path, 'r', encoding="utc-8") as file:
                     self.__objects = json.load(file)
-            except Exception:
-                pass
+            except Exception as e:
+                print("{}".format(e))
 
     """ def classes(self):
         """
