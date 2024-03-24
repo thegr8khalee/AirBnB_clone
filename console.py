@@ -191,7 +191,7 @@ class HBNBCommand(cmd.Cmd):
             if meth != "update":
                 return args_dict[meth]("{} {}".format(clss, arg2))
             else:
-                temp = args2.split(",").strip('"')
+                temp = args2.split(",")
                 cls_id = temp[1]
                 cls_att = temp[2]
                 cls_att_value = temp[3]
