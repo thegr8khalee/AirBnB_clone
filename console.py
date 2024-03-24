@@ -112,7 +112,10 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and id.
         """
         args = shlex.split(arg)
-        class_name = args[0]
+        try:
+            class_name = args[0]
+        except IndexError:
+            pass
 
 
         if not args:
