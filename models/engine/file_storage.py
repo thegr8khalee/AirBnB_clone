@@ -34,15 +34,18 @@ class FileStorage:
         if os.path.isfile(FileStorage.__file_path):
             try:
                 with open(self.__file_path, 'r', encoding="utc-8") as file:
-                    self.__objects = json.load(file)
+                    things = json.load(file)
+                    things = {key: self.classes()[value["__class__"]](**value)
+                        for key, value in things.items()}
+                    FileStorage.__objects = things
             except Exception:
                 pass
 
-    """ def classes(self):
-        """
-    """Returns a dictionary of valid classes and their references.
-    """
-    """from models.base_model import BaseModel
+    def classes(self):
+    
+        """Returns a dictionary of valid classes and their references."""
+    
+        from models.base_model import BaseModel
         from models.user import User
         from models.state import State
         from models.city import City
@@ -57,4 +60,4 @@ class FileStorage:
                    "Amenity": Amenity,
                    "Place": Place,
                    "Review": Review}
-        return classes """
+        return classes
