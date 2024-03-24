@@ -186,15 +186,15 @@ class HBNBCommand(cmd.Cmd):
 
         meth = args2[0]
         # meth = [update]
-
+        temp = arg2.split(",")
+        
         if meth in args_dict.keys():
             if meth != "update":
                 return args_dict[meth]("{} {}".format(clss, arg2))
             else:
-                temp = arg2.split(",")
-                cls_id = temp[1]
-                cls_att = temp[2]
-                cls_att_value = temp[3]
+                cls_id = temp[0].strip('"')
+                cls_att = temp[1].strip('"')
+                cls_att_value = temp[2].strip('"')
                 return args_dict[meth]("{} {} {} {}".format(clss, cls_id, cls_att, cls_att_value))
         
         print("*** Unknown syntax: {}".format(arg))
