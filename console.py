@@ -232,13 +232,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
+        elif "{}.{}".format(args[0], args[1]) not in storage.all().keys():
+            print("** no instance found **")
         else:
-            #things = storage.all()
-            key = "{}.{}".format(args[0], args[1])
-            if key in storage.all():
-                storage.all()[key].delete()
-            else:
-                print("** no instance found **")
+            del storage.all()["{}.{}".format(args[0], args[1])]
+            storage.save()
 
     """ def do_update(self, arg):
         """
