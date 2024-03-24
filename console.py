@@ -174,18 +174,28 @@ class HBNBCommand(cmd.Cmd):
             "count": self.do_count,
         }
 
+        #User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", "first_name", "John")
         args = arg.split('.')
+        # args [user, update("38f22813-2753-4d42-b37c-57a17f1e4f88", "first_name", "John")]
         clss = args[0]
-
+        # clss = user
         args2 = args[1].split('(')
+        # args2 = [update, "38f22813-2753-4d42-b37c-57a17f1e4f88", "first_name", "John")]
         arg2 = args2[1].split(')')[0]
-
+        # arg2 = ["38f22813-2753-4d42-b37c-57a17f1e4f88", "first_name", "John"]
 
         meth = args2[0]
-        
+        # meth = [update]
 
         if meth in args_dict.keys():
-            return args_dict[meth]("{} {}".format(clss, arg2))
+            if meth != "update":
+                return args_dict[meth]("{} {}".format(clss, arg2))
+            else:
+                temp = args2.split(",").strip('"')
+                cls_id = temp[1]
+                cls_att = temp[2]
+                cls_att_value = temp[3]
+                return args_dict[meth]("{} {} {} {} {}".format(clss, arg2, cls_id, cls_att, cls_att_value))
         
         print("*** Unknown syntax: {}".format(arg))
         return False
