@@ -35,8 +35,8 @@ class FileStorage:
             try:
                 with open(self.__file_path, 'r', encoding="utc-8") as file:
                     self.__objects = json.load(file)
-            except Exception as e:
-                print("{}".format(e))
+            except Exception:
+                pass
 
     """ def classes(self):
         """
