@@ -2,22 +2,28 @@
 """
 Write a class BaseModel that defines all common attributes/methods for other classes
 """
+
 import uuid
 from datetime import datetime
 from models import storage
+
+
 class BaseModel:
     """
     Initialize BaseModel instance
     """
+
     def __init__(self, *args, **kwargs):
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
                 if key == "created_at":
                     self.__dict__["created_at"] = datetime.strptime(
-                        kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                        kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"
+                    )
                 elif key == "updated_at":
                     self.__dict__["updated_at"] = datetime.strptime(
-                        kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                        kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"
+                    )
                 else:
                     self.__dict__[key] = kwargs[key]
         else:
@@ -32,7 +38,7 @@ class BaseModel:
         """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
-    
+
     def save(self):
         """
         updates the public instance attribute updated_at with the current datetime
@@ -51,6 +57,7 @@ class BaseModel:
 
         return inst_dict
 
+
 if __name__ == "__main__":
     my_model = BaseModel()
     my_model.name = "My First Model"
@@ -62,7 +69,9 @@ if __name__ == "__main__":
     print(my_model_json)
     print("JSON of my_model:")
     for key in my_model_json.keys():
-        print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+        print(
+            "\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key])
+        )
 
     print("--")
     my_new_model = BaseModel(**my_model_json)
@@ -85,4 +94,3 @@ if __name__ == "__main__":
     my_model.my_number = 89
     my_model.save()
     print(my_model)
-
