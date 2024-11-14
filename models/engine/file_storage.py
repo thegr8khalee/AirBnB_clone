@@ -41,6 +41,20 @@ class FileStorage:
                 k: self.classes()[v["__class__"]](**v) for k, v in obj_dict.items()
             }
             FileStorage.__objects = obj_dict
+            
+    def delete(self, obj=None):
+        """Deletes obj from __objects if it exists.
+
+        Args:
+            obj (optional): The object to delete from storage.
+        """
+        if obj is None:
+            return
+
+        obj_key = obj.__class__.__name__ + '.' + obj.id  # Create the key from class name and id
+        if obj_key in self.__objects:
+            del self.__objects[obj_key]  # Delete the object by its key
+
 
     def classes(self):
         """Returns a dictionary of valid classes and their references."""

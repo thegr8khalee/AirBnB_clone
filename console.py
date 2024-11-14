@@ -16,6 +16,27 @@ from models.review import Review
 import re
 import ast
 
+# def _key_value_parser(self, args):
+#         """creates a dictionary from a list of strings"""
+#         new_dict = {}
+#         for arg in args:
+#             if "=" in arg:
+#                 kvp = arg.split('=', 1)
+#                 key = kvp[0]
+#                 value = kvp[1]
+#                 if value[0] == value[-1] == '"':
+#                     value = shlex.split(value)[0].replace('_', ' ')
+#                 else:
+#                     try:
+#                         value = int(value)
+#                     except:
+#                         try:
+#                             value = float(value)
+#                         except:
+#                             continue
+#                 new_dict[key] = value
+#         return new_dict
+
 
 def eval_curls(temp):
     """_summary_
@@ -55,6 +76,7 @@ class HBNBCommand(cmd.Cmd):
 
     valid_classes = ["BaseModel", "User", "State", "City", "Place", "Amenity", "Review"]
 
+    
     def do_create(self, arg):
         """
         Creates a new instance of BaseModel, saves it, and prints the id.
@@ -68,10 +90,48 @@ class HBNBCommand(cmd.Cmd):
         if class_name not in self.valid_classes:
             print("** class doesn't exist **")
             return
-
+        
         new_instance = eval(f"{args[0]}()")
-        storage.save()
+        
+        for param in args[1:]:
+            if "=" not in param:
+                continue
+            key, value = param.split("=", 1)
+            
+            value = value.strip()
+            print(value)
+            
+            
+            if value[0] == '"' and value[-1] == '"':
+                    value = shlex.split(value)[0].replace('_', ' ')
+                    value = str(value)
+            elif "." in value:
+                try:
+                    value = float(value)
+                except ValueError:
+                    continue
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    continue
+                
+            setattr(new_instance, key, value)
+        new_instance.save()
         print(new_instance.id)
+        # if len(args) > 2:
+        #     new_instance = eval(f"{args[0]}()")
+        #     storage.save()
+
+        #     for i in range(2, len(args)):
+        #         params = args[i].split("=")
+        #         key = params[0]
+        #         value = params[1]
+        #         setattr(storage.all()[new_instance.id], key, value)
+        # else:
+        #     new_instance = eval(f"{args[0]}()")
+        #     storage.save()
+        #     print(new_instance.id)
 
     def do_show(self, arg):
         """

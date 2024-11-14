@@ -71,6 +71,13 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=io.StringIO()) as f:
             self.console.onecmd("invalid_command")
             self.assertTrue(f.getvalue().strip())
+        
+    def test_default_command(self):
+        new_instance = BaseModel()
+        new_instance_id = new_instance.id
+        with patch('sys.stdout', new=io.StringIO()) as f:
+            self.console.onecmd("BaseModel.update ({} name 'test')".format(new_instance_id))
+            self.assertFalse(f.getvalue().strip())
 
 
 if __name__ == '__main__':
